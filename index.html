@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz da Gabs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d63384;
+    }
+    .pergunta {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .opcao {
+      display: block;
+      margin: 5px 0;
+    }
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quanto o Matheus me conhece?</h1>
+  <form id="quizForm">
+    <div class="pergunta">
+      <p>1. Qual é meu nome completo?</p>
+      <input type="text" name="q1" />
+    </div>
+    <div class="pergunta">
+      <p>2. Qual é minha data de nascimento?</p>
+      <label class="opcao"><input type="radio" name="q2" value="certa" /> 06/09/2007</label>
+      <label class="opcao"><input type="radio" name="q2" value="errada" /> 06/08/2007</label>
+    </div>
+    <div class="pergunta">
+      <p>3. Qual é minha série favorita?</p>
+      <label class="opcao"><input type="radio" name="q3" value="certa" /> Stranger Things</label>
+      <label class="opcao"><input type="radio" name="q3" value="errada" /> Frienda</label>
+    </div>
+    <div class="pergunta">
+      <p>4. Qual é minha cor favorita?</p>
+      <label class="opcao"><input type="radio" name="q4" value="certa" /> Ciano</label>
+      <label class="opcao"><input type="radio" name="q4" value="errada" /> Preto</label>
+    </div>
+    <div class="pergunta">
+      <p>5. Qual é minha comida favorita?</p>
+      <label class="opcao"><input type="radio" name="q5" value="certa" /> Strogonoff de frango</label>
+      <label class="opcao"><input type="radio" name="q5" value="errada" /> Pizza</label>
+    </div>
+    <div class="pergunta">
+      <p>6. Qual profissão eu quero seguir?</p>
+      <label class="opcao"><input type="radio" name="q6" value="certa" /> Arquitetura</label>
+      <label class="opcao"><input type="radio" name="q6" value="errada" /> Direito</label>
+    </div>
+    <div class="pergunta">
+      <p>7. Quantos irmãos eu tenho?</p>
+      <label class="opcao"><input type="radio" name="q7" value="certa" /> 3</label>
+      <label class="opcao"><input type="radio" name="q7" value="errada" /> 4</label>
+    </div>
+    <div class="pergunta">
+      <p>8. Qual profissão eu já sou formada?</p>
+      <label class="opcao"><input type="radio" name="q8" value="certa" /> Design de Interiores</label>
+      <label class="opcao"><input type="radio" name="q8" value="errada" /> Administração</label>
+    </div>
+    <div class="pergunta">
+      <p>9. Quanto eu calço?</p>
+      <label class="opcao"><input type="radio" name="q9" value="certa" /> 38</label>
+      <label class="opcao"><input type="radio" name="q9" value="errada" /> 37</label>
+    </div>
+    <div class="pergunta">
+      <p>10. Qual é a cor do meu notebook?</p>
+      <label class="opcao"><input type="radio" name="q10" value="certa" /> Rosa</label>
+      <label class="opcao"><input type="radio" name="q10" value="errada" /> Preto</label>
+    </div>
+    <button type="submit">Enviar Respostas</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      let score = 0;
+      const respostas = new FormData(e.target);
+      if (
+        respostas.get("q1").toLowerCase().includes("gabriella") &&
+        respostas.get("q1").toLowerCase().includes("pedralina")
+      ) {
+        score++;
+      }
+      for (let i = 2; i <= 10; i++) {
+        if (respostas.get("q" + i) === "certa") {
+          score++;
+        }
+      }
+
+      let mensagem = "";
+      if (score >= 8) {
+        mensagem = "✨ Você me conhece como ninguém! 😍";
+      } else if (score >= 5) {
+        mensagem = "Hm... precisamos conversar 🤨 rs";
+      } else {
+        mensagem = "Socorro, Matheus! Bora fazer um intensivão sobre mim 😬";
+      }
+
+      document.getElementById("resultado").innerHTML = `
+        <p>${mensagem}</p>
+        <p>Acertou ${score} de 10 perguntas.</p>
+        <a href="https://gabspedralina.github.io/missao_matheus/" target="_blank">⬅️ Voltar ao tabuleiro</a>
+      `;
+    });
+  </script>
+</body>
+</html>
